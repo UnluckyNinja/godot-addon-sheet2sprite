@@ -1,0 +1,245 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/sheet_to_sprite/view.gd" type="Script" id=1]
+[ext_resource path="res://addons/sheet_to_sprite/ui/SheetSelect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/sheet_to_sprite/ui/SheetList.gd" type="Script" id=4]
+
+[sub_resource type="Theme" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.160784, 0.176471, 0.25098, 1 )
+
+[node name="PluginView" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 200 )
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.2, 0.231373, 0.309804, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1022.0
+margin_bottom = 598.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
+margin_right = 200.0
+margin_bottom = 596.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 570.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_vertical = 3
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/HBoxContainer2/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+margin_right = 200.0
+margin_bottom = 570.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+fixed_icon_size = Vector2( 64, 64 )
+script = ExtResource( 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+margin_top = 574.0
+margin_right = 200.0
+margin_bottom = 596.0
+alignment = 2
+
+[node name="Add" type="ToolButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 36.0
+margin_right = 73.0
+margin_bottom = 22.0
+text = "Add"
+
+[node name="Rename" type="ToolButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 77.0
+margin_right = 141.0
+margin_bottom = 22.0
+text = "Rename"
+
+[node name="Delete" type="ToolButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+margin_left = 145.0
+margin_right = 200.0
+margin_bottom = 22.0
+text = "Delete"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
+margin_left = 202.0
+margin_right = 1020.0
+margin_bottom = 596.0
+size_flags_horizontal = 3
+custom_constants/separation = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer2"]
+margin_right = 818.0
+margin_bottom = 24.0
+
+[node name="set_preview" type="ToolButton" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+margin_right = 104.0
+margin_bottom = 24.0
+theme = SubResource( 2 )
+text = "Set as Preview"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+margin_left = 108.0
+margin_right = 112.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+margin_left = 116.0
+margin_top = 5.0
+margin_right = 174.0
+margin_bottom = 19.0
+text = "Cell Size:"
+
+[node name="label_width" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+margin_left = 178.0
+margin_top = 5.0
+margin_right = 217.0
+margin_bottom = 19.0
+text = "width:"
+
+[node name="input_width" type="SpinBox" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 221.0
+margin_right = 295.0
+margin_bottom = 24.0
+min_value = 1.0
+max_value = 1024.0
+value = 16.0
+
+[node name="label_height" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+margin_left = 299.0
+margin_top = 5.0
+margin_right = 343.0
+margin_bottom = 19.0
+text = "height:"
+
+[node name="input_height" type="SpinBox" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 347.0
+margin_right = 421.0
+margin_bottom = 24.0
+min_value = 1.0
+max_value = 1024.0
+value = 16.0
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+margin_left = 425.0
+margin_right = 429.0
+margin_bottom = 24.0
+
+[node name="origin_label" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+margin_left = 433.0
+margin_top = 5.0
+margin_right = 519.0
+margin_bottom = 19.0
+text = "Origin Offset:"
+
+[node name="label_offsetx" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+margin_left = 523.0
+margin_top = 5.0
+margin_right = 534.0
+margin_bottom = 19.0
+text = "x:"
+
+[node name="input_offsetx" type="SpinBox" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 538.0
+margin_right = 612.0
+margin_bottom = 24.0
+min_value = -1024.0
+max_value = 1024.0
+
+[node name="label_offsety" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+margin_left = 616.0
+margin_top = 5.0
+margin_right = 627.0
+margin_bottom = 19.0
+text = "y:"
+
+[node name="input_offsety" type="SpinBox" parent="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 631.0
+margin_right = 705.0
+margin_bottom = 24.0
+min_value = -1024.0
+max_value = 1024.0
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer2"]
+margin_top = 26.0
+margin_right = 818.0
+margin_bottom = 596.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer2/PanelContainer"]
+unique_name_in_owner = true
+margin_right = 818.0
+margin_bottom = 570.0
+mouse_filter = 2
+scroll_horizontal = 441
+scroll_vertical = 317
+
+[node name="margin_container" type="MarginContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer2/PanelContainer/ScrollContainer"]
+unique_name_in_owner = true
+margin_left = -441.0
+margin_top = -317.0
+margin_right = 1259.0
+margin_bottom = 887.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+custom_constants/margin_right = 818
+custom_constants/margin_top = 570
+custom_constants/margin_left = 818
+custom_constants/margin_bottom = 570
+
+[node name="Wrapper" type="Control" parent="MarginContainer/HBoxContainer2/VBoxContainer2/PanelContainer/ScrollContainer/margin_container"]
+unique_name_in_owner = true
+margin_left = 818.0
+margin_top = 570.0
+margin_right = 882.0
+margin_bottom = 634.0
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 1
+
+[node name="SheetSelect" parent="MarginContainer/HBoxContainer2/VBoxContainer2/PanelContainer/ScrollContainer/margin_container/Wrapper" instance=ExtResource( 3 )]
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+window_title = "请确认..."
+dialog_text = "Delete selected sheet? (can't undo)"
+
+[connection signal="item_selected" from="MarginContainer/HBoxContainer2/VBoxContainer/ScrollContainer/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBoxContainer/HBoxContainer/Delete" to="." method="_on_Delete_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/set_preview" to="." method="_on_set_preview_pressed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/input_width" to="." method="_on_input_width_value_changed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/input_height" to="." method="_on_input_height_value_changed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/input_offsetx" to="." method="_on_input_offsetx_value_changed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/input_offsety" to="." method="_on_input_offsety_value_changed"]
+[connection signal="resized" from="MarginContainer/HBoxContainer2/VBoxContainer2/PanelContainer/ScrollContainer" to="." method="_on_ScrollContainer_resized"]
+[connection signal="gui_input" from="MarginContainer/HBoxContainer2/VBoxContainer2/PanelContainer/ScrollContainer/margin_container" to="." method="_on_margin_container_gui_input"]
+
+[editable path="MarginContainer/HBoxContainer2/VBoxContainer2/PanelContainer/ScrollContainer/margin_container/Wrapper/SheetSelect"]

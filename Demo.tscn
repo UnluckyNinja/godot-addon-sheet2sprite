@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://colored-transparent_packed by kenney.png" type="Texture" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[node name="Demo" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 389.496, 264.794 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 288, 0, 48, 48 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextEdit" type="TextEdit" parent="Control"]
+margin_left = 17.0
+margin_top = 77.0
+margin_right = 562.0
+margin_bottom = 177.0
+text = "1. Open \"SpriteSheet\" in bottom panel
+2. Drag a sprite sheet file into the left area of it
+3. To the right, hold middle mouse button or space to pan the canvas.
+4. Right click and drag to select a part of sprite.
+5. Left click selected area and drag to 2D viewport then release to make it a sprite"
+readonly = true
+wrap_enabled = true
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 124, 256 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 16, 64, 32 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 126, 304 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 16, 32, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 285.69, 297.391 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 160, 240, 48, 32 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( 251, 229 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 256, 48, 48 )
+
+[node name="Sprite6" type="Sprite" parent="."]
+position = Vector2( 217.22, 298.513 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 304, 48, 48 )
+
+[node name="Sprite7" type="Sprite" parent="."]
+position = Vector2( 302.527, 226.676 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 208, 48, 48 )
