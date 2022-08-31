@@ -13,10 +13,10 @@ func can_drop_data(position: Vector2, data) -> bool:
       var file := data.files[0] as String
       if regex.search(file.get_extension()) != null:
         return true
-  elif data is Texture:
-    var idx = get_item_at_position(position, true)
-    if idx >= 0:
-      return true
+    if data.type == 'obj_property' and data.value is Texture:
+      var idx = get_item_at_position(position, true)
+      if idx >= 0:
+        return true
   return false
 
 func drop_data(position: Vector2, data) -> void:
@@ -28,8 +28,8 @@ func drop_data(position: Vector2, data) -> void:
         add_item(file.get_file(), texture)
         var idx = get_item_count() - 1
         set_item_metadata(idx, file)
-  elif data is Texture:
-    var idx = get_item_at_position(position, true)
-    if idx >= 0:
-      set_item_icon(idx, data)
+    if data.type == 'obj_property' and data.value is Texture:
+      var idx = get_item_at_position(position, true)
+      if idx >= 0:
+        set_item_icon(idx, data.value)
   pass

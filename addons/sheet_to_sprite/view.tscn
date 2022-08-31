@@ -77,10 +77,10 @@ margin_bottom = 22.0
 text = "Rename"
 
 [node name="Delete" type="ToolButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
-margin_left = 145.0
+margin_left = 136.0
 margin_right = 200.0
 margin_bottom = 22.0
-text = "Delete"
+text = "Remove"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
 margin_left = 202.0
@@ -230,7 +230,7 @@ mouse_filter = 1
 margin_right = 200.0
 margin_bottom = 70.0
 window_title = "请确认..."
-dialog_text = "Delete selected sheet? (can't undo)"
+dialog_text = "Remove selected sheet from the list? (can't undo)"
 
 [connection signal="item_selected" from="MarginContainer/HBoxContainer2/VBoxContainer/ScrollContainer/ItemList" to="." method="_on_ItemList_item_selected"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer2/VBoxContainer/HBoxContainer/Delete" to="." method="_on_Delete_pressed"]

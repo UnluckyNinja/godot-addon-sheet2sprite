@@ -23,6 +23,9 @@ func _ready() -> void:
   
   if plugin:
     plugin.get_canvas_item_editor().get_parent().set_drag_forwarding(self)
+  
+  # setup delete function
+  $ConfirmationDialog.connect('confirmed', self, '_delete_item', [])
 
 func _notification(what: int) -> void:
   if what == NOTIFICATION_DRAG_END:
@@ -238,7 +241,6 @@ func drop_data_fw(position: Vector2, data, from) -> void:
 func _on_Delete_pressed() -> void:
   if item_list.get_selected_items().size() > 0:
     $ConfirmationDialog.popup_centered()
-    $ConfirmationDialog.connect('confirmed', self, '_delete_item', [], CONNECT_ONESHOT)
 
 func _delete_item() -> void:
   if item_list.get_selected_items().size() > 0:
