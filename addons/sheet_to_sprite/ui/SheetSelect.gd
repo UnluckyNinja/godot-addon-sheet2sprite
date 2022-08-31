@@ -69,14 +69,24 @@ func get_selection_as_texture() -> Texture:
   atlas.filter_clip = true # doesn't work?
   atlas.resource_local_to_scene = true
   return atlas
+  
+var drag_data_store
 
 func get_drag_data(position: Vector2):
   if snap_selection().has_point(position):
     var texture = get_selection_as_texture()
     var control = TextureRect.new()
     control.texture = texture
+    control.modulate = ColorN('white', 0.5)
     set_drag_preview(control)
-    return texture
+    drag_data_store = texture
+    var drag_data = {
+      type = 'obj_property',
+      object = self,
+      property = 'drag_data_store',
+      value = texture
+    }
+    return drag_data
 
 func _on_mouse_move(event: InputEventMouseMotion) -> void:
   if not selecting:

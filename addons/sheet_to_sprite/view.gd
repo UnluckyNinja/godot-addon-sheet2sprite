@@ -24,6 +24,13 @@ func _ready() -> void:
   if plugin:
     plugin.get_canvas_item_editor().get_parent().set_drag_forwarding(self)
 
+func _notification(what: int) -> void:
+  if what == NOTIFICATION_DRAG_END:
+    _remove_preview()
+  elif what == NOTIFICATION_PREDELETE:
+    preview_node.queue_free()
+  pass
+
 # for debug
 func print_tree_class(node: Node, depth: int):
   for n in node.get_children():
@@ -152,12 +159,50 @@ func update_setting(setting: Dictionary):
   $'%input_offsety'.value = setting['offset_y']
 
 func can_drop_data_fw(position: Vector2, data, from) -> bool:
-  if data is Texture:
+  print(data)
+  var condition = data is Dictionary and data.type == 'obj_property' and data.value is Texture
+  if condition:
+    var value = data.value
+    var root = plugin.get_editor_interface().get_edited_scene_root()
+    var selected = plugin.get_editor_interface().get_selection().get_selected_nodes()
+    var pos
+    var scale = Vector2.ONE
+    if selected.size() > 0:
+      pos = selected[0].get_viewport().canvas_transform.affine_inverse().xform(selected[0].get_viewport().get_mouse_position())
+      if selected[0] is CanvasItem:
+        scale = (selected[0] as CanvasItem).get_global_transform().get_scale()
+    else:
+      pos = root.get_viewport().canvas_transform.affine_inverse().xform(root.get_viewport().get_mouse_position())
+    if not preview_node.get_parent():
+      _create_preview(value)
+    preview_node.set_global_position(pos)
+    preview_node.scale = scale
     return true
   return false
+  
+onready var preview_node := Node2D.new()
+func _create_preview(value: Texture):
+  var sprite = Sprite.new()
+  sprite.texture = value
+  sprite.modulate = ColorN('white', 0.7)
+  preview_node.add_child(sprite)
+  plugin.get_editor_interface().get_edited_scene_root().add_child(preview_node)
+  pass
+  
+func _remove_preview():
+  if not preview_node.get_parent():
+    return
+  for c in preview_node.get_children():
+    preview_node.remove_child(c)
+    c.queue_free()
+  preview_node.get_parent().remove_child(preview_node)
+  pass
 
 func drop_data_fw(position: Vector2, data, from) -> void:
-  if data is Texture:
+  _remove_preview()
+  var condition = data is Dictionary and data.type == 'obj_property' and data.value is Texture
+  if condition:
+    var value = data.value
     var root = plugin.get_editor_interface().get_edited_scene_root()
     var selected = plugin.get_editor_interface().get_selection().get_selected_nodes()
     
@@ -166,12 +211,12 @@ func drop_data_fw(position: Vector2, data, from) -> void:
     
     var sprite = Sprite.new()
     history.add_do_reference(sprite)
-    if data is AtlasTexture:
+    if value is AtlasTexture:
       history.add_do_property(sprite, 'region_enabled', true)
-      history.add_do_property(sprite, 'region_rect', data.region)
-      history.add_do_property(sprite, 'texture', data.atlas)
+      history.add_do_property(sprite, 'region_rect', value.region)
+      history.add_do_property(sprite, 'texture', value.atlas)
     else:
-      history.add_do_property(sprite, 'texture', data)
+      history.add_do_property(sprite, 'texture', value)
 
     # in first selected or scene root
     if selected.size() > 0:
@@ -204,3 +249,4 @@ func _on_set_preview_pressed() -> void:
   var data = sheet_select.get_selection_as_texture()
   if data and item_list.get_selected_items().size() > 0:
     item_list.set_item_icon(item_list.get_selected_items()[0], data)
+
